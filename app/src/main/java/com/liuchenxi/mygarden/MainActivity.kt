@@ -1,16 +1,20 @@
 package com.liuchenxi.mygarden
 
+import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.liuchenxi.foundation.PermissionsManager
 import com.liuchenxi.foundation.TextureManager
+import com.liuchenxi.mygarden.base.BaseActivity
+import pub.devrel.easypermissions.AfterPermissionGranted
 //import com.mob.MobSDK
 //import com.mob.OperationCallback
 import pub.devrel.easypermissions.EasyPermissions
+import pub.devrel.easypermissions.PermissionRequest
 
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
   val TAG: String = "MainActivity";
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +25,27 @@ class MainActivity : AppCompatActivity() {
     //权限申请！
 
 
+  }
+
+  companion object{
+    const val CALL_PHONE = 100
+  }
+
+
+  @AfterPermissionGranted(CALL_PHONE)
+  private fun callService() {
+    val permissions = arrayOf(Manifest.permission.CALL_PHONE,Manifest.permission.CAMERA)
+    if (EasyPermissions.hasPermissions(this, *permissions)) {
+//      CommonUtil.callPhone(this@AboutActivity, aboutUsEntity.getTelephone())
+    } else {
+      EasyPermissions.requestPermissions(this, "请授予拨打电话权限", CALL_PHONE, *permissions)
+    }
+
+  }
+  override fun onResume() {
+    super.onResume()
+    PermissionsManager.methodRequiresCamaraPermission(this)
+    callService()
   }
 
 //  //隐私协议
@@ -36,15 +61,7 @@ class MainActivity : AppCompatActivity() {
 //    })
 //  }
 
-  //权限申请
-  override fun onRequestPermissionsResult(
-    requestCode: Int,
-    permissions: Array<String>,
-    grantResults: IntArray
-  ) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-    // Forward results to EasyPermissions
-    EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+  override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    PermissionsManager.onRequestPermissionsResultCamera(requestCode,permissions,grantResults)
   }
 }

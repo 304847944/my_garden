@@ -1,16 +1,18 @@
-package com.liuchenxi.mygarden;
+package com.liuchenxi.foundation;
 
 import android.app.Activity;
 import android.app.Application;
 
-import com.liuchenxi.foundation.BaseApplication;
 import com.liuchenxi.foundation.TextureManager;
 
-public class MyApplication extends BaseApplication {
+public abstract class BaseApplication extends Application {
+
+    public static Activity mCurrentActivity;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
         //初始化fresco
         TextureManager.Companion.InitFresco(this);
     }

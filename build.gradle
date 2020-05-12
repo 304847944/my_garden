@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+apply from: "config.gradle"
 buildscript {
     ext.kotlin_version = '1.3.41'
     repositories {
@@ -20,53 +20,6 @@ buildscript {
         //MobShare:分享和登录，仅接入了微信和qq
 //        classpath "com.mob.sdk:MobSDK:2018.0319.1724"
     }
-
-    ext {
-        minSdkVersion = 19
-        targetSdkVersion = 28
-        compileSdkVersion = 28
-        buildToolsVersion = '3.1.2'
-        versionCode = 1
-        versionName = "1.0"
-    }
-
-    ext.deps = [
-            junit             : 'junit:junit:4.12',
-            truth             : 'com.google.truth:truth:0.28',
-            robolectric       : 'org.robolectric:robolectric:3.3',
-            mockito           : "org.mockito:mockito-core:2.8.9",
-            json              : "org.json:json:20160810",
-            supportAnnotations: "com.android.support:support-annotations:27.1.0",
-            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
-            appcompat         : 'com.android.support:appcompat-v7:28.0.0',
-            constraint        : 'com.android.support.constraint:constraint-layout:1.1.2',
-            runner            : 'com.android.support.test:runner:1.0.2',
-            espresso          : 'com.android.support.test.espresso:espresso-core:3.0.2',
-            // 函数式编程框架
-            rxjava            : "io.reactivex.rxjava2:rxjava:2.1.12",
-            rxandroid         : 'io.reactivex.rxjava2:rxandroid:2.0.2',
-            retrofit          : 'com.squareup.retrofit2:retrofit:2.3.0',
-            // 网络通信框架
-            retrofit2converter: 'com.squareup.retrofit2:converter-gson:2.3.0',
-            retrofit2rxjava2  : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
-            // OKHttp的日志打印拦截器
-            okhttp3logging    : 'com.squareup.okhttp3:logging-interceptor:3.4.1',
-            //recycleview-BRAVH
-            recyclerview      : 'com.android.support:recyclerview-v7:28.0.0',
-            BaseRecyclerViewAdapterHelper : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30',
-            glide             : 'com.github.bumptech.glide:glide:4.8.0',
-            design            : 'com.android.support:design:28.0.0',
-
-            logger            : 'com.orhanobut:logger:2.2.0',
-            bluetooth         : 'com.inuker.bluetooth:library:1.4.0',
-            eventbus          : 'org.greenrobot:eventbus:3.1.1',
-
-            arouter           :'com.alibaba:arouter-api:1.5.0',
-            arouter_compiler  : 'com.alibaba:arouter-compiler:1.2.2',
-            multitype         : 'me.drakeet.multitype:multitype-kotlin:3.4.4',
-
-            fresco            : 'com.facebook.fresco:fresco:2.2.0'
-    ]
 }
 
 allprojects {

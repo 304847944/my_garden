@@ -1,3 +1,9 @@
 <resources>
-  <string name="app_name">MyGarden</string>
+    <string name="app_name">My Application</string>
+    <string name="button">Button</string>
+    <string name="login_button">login_button</string>
+    <string name="message">message</string>
+    <string name="send_message">send_message</string>
+    <string name="get_message">get_message</string>
+    <item name="RecyclerViewTest_Adapter_viewholder_support" type="id"/>
 </resources>

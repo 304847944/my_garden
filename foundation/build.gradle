@@ -1,16 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
 
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -35,10 +36,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //fresco
-    implementation dep.fresco
+    implementation deps.fresco
 // 支持 GIF 动图，需要添加
-    implementation 'com.facebook.fresco:animated-gif:2.2.0'
+    implementation deps.fresco_animated_git
 // 支持 WebP （静态图+动图），需要添加
-    implementation 'com.facebook.fresco:animated-webp:2.2.0'
-    implementation 'com.facebook.fresco:webpsupport:2.2.0'
+    implementation deps.fresco_animated_webp
+    implementation deps.fresco_webpsupport
+
+    implementation deps.easypermissions
+
+    implementation deps.Toasty
 }
