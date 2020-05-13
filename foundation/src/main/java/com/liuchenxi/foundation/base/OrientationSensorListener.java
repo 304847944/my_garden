@@ -1,4 +1,4 @@
-package com.liuchenxi.mygarden.base;
+package com.liuchenxi.foundation.base;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -10,7 +10,8 @@ import android.view.Surface;
 
 import androidx.annotation.IntDef;
 
-import com.liuchenxi.mygarden.R;
+import com.liuchenxi.foundation.R;
+
 
 /**
  * 横竖屏、重力监听！

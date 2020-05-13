@@ -15,6 +15,14 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+        //注释器问题报错添加 Annotation processors
+//        javaCompileOptions {
+//            annotationProcessorOptions { includeCompileClasspath = true }
+//        }
+        //这里不知道为啥，会重复这个文件，所以去掉
+        packagingOptions {
+            exclude 'META-INF/metadata.kotlin_module'
+        }
     }
 
     buildTypes {
@@ -43,7 +51,12 @@ dependencies {
     implementation deps.fresco_animated_webp
     implementation deps.fresco_webpsupport
 
-    implementation deps.easypermissions
+    implementation deps.rxpermissions
+//    implementation deps.rxjava3 // 接入会有问题，min api 24
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'//这里权限许可要求是rxjava2才行？！！！，先这样吧，重复的坑先留着
+//    implementation deps.permissionsdispatcher
+//    implementation deps.permissionsdispatcher_processor
 
     implementation deps.Toasty
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

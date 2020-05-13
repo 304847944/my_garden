@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 //apply plugin: 'com.mob.sdk'
 
 android {
@@ -16,6 +18,14 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//注释器问题报错添加 Annotation processors
+        javaCompileOptions {
+            annotationProcessorOptions { includeCompileClasspath = true }
+        }
+        packagingOptions {
+            exclude 'META-INF/metadata.kotlin_module'
+            exclude 'META-INF/metadata.jvm.kotlin_module'
+        }
     }
     buildTypes {
         release {
@@ -67,8 +77,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    //权限申请库
-    implementation deps.easypermissions
+    //权限申请库:弃用！因为注解在activity不方便
+//    implementation deps.permissionsdispatcher
+//    kapt  deps.permissionsdispatcher_processor
+
+    implementation deps.rxpermissions
+//    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:4.7.0'
     //    implementation project(path: ':texturemanager', configuration:'default')
     //    compile project(path: ':texturemanager')
     implementation project(':foundation')

@@ -47,10 +47,17 @@ ext.deps = [
         fresco_animated_git   : 'com.facebook.fresco:animated-gif:2.2.0',
         fresco_animated_webp   : 'com.facebook.fresco:animated-webp:2.2.0',
         fresco_webpsupport : 'com.facebook.fresco:webpsupport:2.2.0',
-//权限库
+//权限库(感觉很不好用，一直在调用resume，舍弃)
         easypermissions   :'pub.devrel:easypermissions:3.0.0',
 //Toasty
-        Toasty            : 'com.github.GrenderG:Toasty:1.4.2'
+        Toasty            : 'com.github.GrenderG:Toasty:1.4.2',
+//权限库:因为permissiondispatcher用了注解的方式，只能在activity和fragment中搞，弄一个透明的activity，麻烦，换一下吧再
+        permissionsdispatcher : "org.permissionsdispatcher:permissionsdispatcher:4.7.0",
+        permissionsdispatcher_processor : "org.permissionsdispatcher:permissionsdispatcher-processor:4.7.0",
+//权限库 rxpermission
+        rxpermissions     :'com.github.tbruyelle:rxpermissions:0.10.2',
+//Rxjava
+        rxjava3           :"io.reactivex.rxjava3:rxjava:3.0.3"
 
 
 ]

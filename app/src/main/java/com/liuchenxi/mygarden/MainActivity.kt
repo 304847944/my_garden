@@ -1,52 +1,43 @@
 package com.liuchenxi.mygarden
 
 import android.Manifest
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import com.liuchenxi.foundation.PermissionsManager
-import com.liuchenxi.foundation.TextureManager
-import com.liuchenxi.mygarden.base.BaseActivity
-import pub.devrel.easypermissions.AfterPermissionGranted
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import com.liuchenxi.foundation.PermissionsManagerActivity.Companion.getPermission
+import com.liuchenxi.foundation.base.BaseActivity
+import com.liuchenxi.foundation.dialogmanager.BaseDialog
+import com.tbruyelle.rxpermissions2.RxPermissions
+import es.dmoral.toasty.Toasty
+
+
 //import com.mob.MobSDK
 //import com.mob.OperationCallback
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.PermissionRequest
-
 
 class MainActivity : BaseActivity() {
 
-  val TAG: String = "MainActivity";
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    //展示同意协议！
-    //跳转广告闪屏页！
-    //权限申请！
-
-
-  }
-
-  companion object{
-    const val CALL_PHONE = 100
-  }
-
-
-  @AfterPermissionGranted(CALL_PHONE)
-  private fun callService() {
-    val permissions = arrayOf(Manifest.permission.CALL_PHONE,Manifest.permission.CAMERA)
-    if (EasyPermissions.hasPermissions(this, *permissions)) {
-//      CommonUtil.callPhone(this@AboutActivity, aboutUsEntity.getTelephone())
-    } else {
-      EasyPermissions.requestPermissions(this, "请授予拨打电话权限", CALL_PHONE, *permissions)
+    val TAG: String = "MainActivity";
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        //展示同意协议！
+        //跳转广告闪屏页！
+        //权限申请！
+        val text: TextView = findViewById(R.id.text_bt)
+        text.setOnClickListener(View.OnClickListener {
+            Toasty.info(this, "点击按钮！").show()
+        })
+        getPermission()
+        var mm:BaseDialog
     }
 
-  }
-  override fun onResume() {
-    super.onResume()
-    PermissionsManager.methodRequiresCamaraPermission(this)
-    callService()
-  }
+    fun getPermission() {
+        var rxPermissions = RxPermissions(this)
+        getPermission(rxPermissions)
+    }
 
 //  //隐私协议
 //  fun submitPrivacyGrantResult(granted: Boolean) {
@@ -60,8 +51,4 @@ class MainActivity : BaseActivity() {
 //      }
 //    })
 //  }
-
-  override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-    PermissionsManager.onRequestPermissionsResultCamera(requestCode,permissions,grantResults)
-  }
 }

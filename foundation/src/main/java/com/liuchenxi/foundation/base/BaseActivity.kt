@@ -1,15 +1,12 @@
-package com.liuchenxi.mygarden.base
+package com.liuchenxi.foundation.base
 
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.liuchenxi.mygarden.MainActivity
-import com.liuchenxi.mygarden.MyApplication
-import com.liuchenxi.mygarden.R
+import com.liuchenxi.foundation.BaseApplication
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -33,7 +30,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.mCurrentActivity = this
+        BaseApplication.mCurrentActivity = this
         if (mOrientationListener != null) {
             sm?.registerListener(mOrientationListener, mSensor, SensorManager.SENSOR_DELAY_UI)
         }
@@ -55,7 +52,7 @@ open class BaseActivity : AppCompatActivity() {
     //模仿bilibili的top！
     override
     fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.test_menu, menu)
+//        menuInflater.inflate(R.menu.test_menu, menu)
         return true
     }
 
