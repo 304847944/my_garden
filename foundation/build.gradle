@@ -58,5 +58,6 @@ dependencies {
 //    implementation deps.permissionsdispatcher_processor
 
     implementation deps.Toasty
+    implementation deps.logger
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
