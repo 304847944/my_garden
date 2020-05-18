@@ -21,6 +21,7 @@ open class BaseActivity : AppCompatActivity() {
         initTopbar()
         sm = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mSensor = sm?.getDefaultSensor(Sensor.TYPE_GRAVITY)
+        BaseApplication.mCurrentActivity = this
 
     }
 

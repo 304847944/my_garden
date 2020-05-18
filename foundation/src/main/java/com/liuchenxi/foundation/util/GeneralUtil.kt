@@ -2,6 +2,7 @@ package com.liuchenxi.foundation.util
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import com.liuchenxi.foundation.BaseApplication
 import com.liuchenxi.foundation.base.DeviceInfo
 
 class GeneralUtil {
@@ -9,7 +10,9 @@ class GeneralUtil {
   companion object {
     private val sLock = Any()
 
-    var sDeviceInfo: DeviceInfo? = null
+    val sDeviceInfo: DeviceInfo by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+      DeviceInfo(BaseApplication.mApplicationContext)
+    }
 
     /**
      * 是否为Debug包
@@ -23,17 +26,10 @@ class GeneralUtil {
       }
     }
 
-    /**
+    /**这里单例竟然这么拿....
      * 设备信息， 包括屏幕分辨率等参数
      */
-    fun getDeviceInfo(context: Context): DeviceInfo? {
-      if (sDeviceInfo == null) {
-        synchronized(sLock) {
-          if (sDeviceInfo == null) {
-            sDeviceInfo = DeviceInfo(context)
-          }
-        }
-      }
+    fun getDeviceInfo(): DeviceInfo{
       return sDeviceInfo
     }
   }

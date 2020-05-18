@@ -7,10 +7,13 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.liuchenxi.foundation.BaseApplication
 import com.liuchenxi.foundation.PermissionsManager
 import com.liuchenxi.foundation.base.BaseActivity
+import com.liuchenxi.foundation.base.DeviceInfo
 import com.liuchenxi.foundation.dialogmanager.BaseDialog
 import com.liuchenxi.foundation.dialogmanager.GeneralDialog
+import com.liuchenxi.foundation.util.GeneralUtil
 import com.tbruyelle.rxpermissions2.RxPermissions
 import es.dmoral.toasty.Toasty
 
@@ -32,6 +35,16 @@ class MainActivity : BaseActivity() {
             Toasty.info(this, "点击按钮！").show()
         })
         getPermission()
+        dialogTest()
+        Toasty.info(this,DeviceInfo.getPhoneInfo().toString()).show()
+    }
+
+    fun getPermission() {
+        PermissionsManager.instance.getPermission()
+    }
+
+    fun dialogTest(){
+        //弹窗测试
         val mm:GeneralDialog = GeneralDialog(this,"这是一个测试","hahahahahahahhaha","确定","取消")
         mm.setOnClickListen(object : BaseDialog.BaseDialogListenTwo {
             override fun firstOrLeft() {
@@ -39,15 +52,10 @@ class MainActivity : BaseActivity() {
             }
 
             override fun secondOrRight() {
-               mm.dismiss()
+                mm.dismiss()
             }
-        })    }
-
-    fun getPermission() {
-        var rxPermissions = RxPermissions(this)
-        PermissionsManager.instance.getPermission(rxPermissions)
+        })
     }
-
 //  //隐私协议
 //  fun submitPrivacyGrantResult(granted: Boolean) {
 //    MobSDK.submitPolicyGrantResult(granted, object : OperationCallback<Void?>() {

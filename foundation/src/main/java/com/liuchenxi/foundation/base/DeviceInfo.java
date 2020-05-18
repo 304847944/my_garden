@@ -32,6 +32,7 @@ import android.util.DisplayMetrics;
 import androidx.core.app.ActivityCompat;
 
 import com.liuchenxi.foundation.BaseApplication;
+import com.liuchenxi.foundation.PermissionsManager;
 import com.orhanobut.logger.Logger;
 
 import java.net.Inet4Address;
@@ -234,9 +235,8 @@ public class DeviceInfo {
                 (TelephonyManager) mApplicationContext.getSystemService(
                         Context.TELEPHONY_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(mApplicationContext,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (!PermissionsManager.Companion.getInstance().checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION))
+        {
             Logger.d("loss ACCESS_COARSE_LOCATION pression");
             return netWorkInfo;
         }

@@ -15,7 +15,7 @@ import io.reactivex.functions.Consumer
  */
 class PermissionsManager {
     companion object {
-        val instance = SingletonHolder.holder
+       val instance = SingletonHolder.holder
     }
 
     private object SingletonHolder {
@@ -24,11 +24,9 @@ class PermissionsManager {
 
     val RC_CAMERA_AND_LOCATION: Int = 201 // 相机
 
-    lateinit var rxPermissions: RxPermissions
-
     @SuppressLint("CheckResult")
-    fun getPermission(rxPermissions: RxPermissions) {
-        rxPermissions.requestEachCombined(
+    fun getPermission() {
+        RxPermissions(mCurrentActivity).requestEachCombined(
             Manifest.permission.CAMERA,
             Manifest.permission.READ_PHONE_STATE
         )
@@ -47,12 +45,8 @@ class PermissionsManager {
             })
     }
 
-    fun checkPermission(mPermission: String) {
-        rxPermissions.isGranted(mPermission)
-    }
-
-    init {
-
+    fun checkPermission(mPermission: String):Boolean {
+        return RxPermissions(mCurrentActivity).isGranted(mPermission)
     }
 
 }
