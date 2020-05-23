@@ -1,2 +1,3 @@
-include ':app', ':foundation'
+include ':app', ':foundation', ':multitype'
 rootProject.name='MyGarden'
+project(':multitype').projectDir = new File('multitype_lib')

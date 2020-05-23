@@ -2,6 +2,7 @@
 apply from: "config.gradle"
 buildscript {
     ext.kotlin_version = '1.3.41'
+    ext.dokkaVersion = '0.9.17'
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter/' }
@@ -12,16 +13,19 @@ buildscript {
         google()
 
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:${dokkaVersion}"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         //MobShare:分享和登录，仅接入了微信和qq
 //        classpath "com.mob.sdk:MobSDK:2018.0319.1724"
     }
 }
+
 
 allprojects {
     repositories {
