@@ -18,10 +18,10 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initTopbar()
-        sm = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        mSensor = sm?.getDefaultSensor(Sensor.TYPE_GRAVITY)
-        BaseApplication.mCurrentActivity = this
+//        initTopbar()
+//        sm = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//        mSensor = sm?.getDefaultSensor(Sensor.TYPE_GRAVITY)
+//        BaseApplication.mCurrentActivity = this
 
     }
 
@@ -31,17 +31,17 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        BaseApplication.mCurrentActivity = this
-        if (mOrientationListener != null) {
-            sm?.registerListener(mOrientationListener, mSensor, SensorManager.SENSOR_DELAY_UI)
-        }
+//        BaseApplication.mCurrentActivity = this
+//        if (mOrientationListener != null) {
+//            sm?.registerListener(mOrientationListener, mSensor, SensorManager.SENSOR_DELAY_UI)
+//        }
     }
 
     override fun onPause() {
         super.onPause()
-        if (mOrientationListener != null) {
-            sm?.unregisterListener(mOrientationListener, mSensor)
-        }
+//        if (mOrientationListener != null) {
+//            sm?.unregisterListener(mOrientationListener, mSensor)
+//        }
     }
 
     //模仿bilibili的top！

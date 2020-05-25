@@ -2,9 +2,13 @@ package com.liuchenxi.mygarden
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -39,31 +43,40 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rootView = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        setContentView(R.layout.activity_main)
+        mTopTab = rootView.mainTopTab
+        mViewPage = rootView.mainViewpage
+        mBottomLayout = rootView.activitybottom
         //展示同意协议！
         //跳转广告闪屏页！
         //权限申请！
-        getPermission()
-        dialogTest()
+//        getPermission()
+//        dialogTest()
+        //初始化fragment页面
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 
     fun getPermission() {
         PermissionsManager.instance.getPermission()
     }
 
-    fun dialogTest(){
-        //弹窗测试
-        val mm:GeneralDialog = GeneralDialog(this,"这是一个测试","hahahahahahahhaha","确定","取消")
-        mm.setOnClickListen(object : BaseDialog.BaseDialogListenTwo {
-            override fun firstOrLeft() {
-                Toasty.info(MyApplication.mCurrentActivity,"left！").show()
-            }
-
-            override fun secondOrRight() {
-                mm.dismiss()
-            }
-        })
-    }
+//    fun dialogTest(){
+//        //弹窗测试
+//        val mm:GeneralDialog = GeneralDialog(this,"这是一个测试","hahahahahahahhaha","确定","取消")
+//        mm.setOnClickListen(object : BaseDialog.BaseDialogListenTwo {
+//            override fun firstOrLeft() {
+//                Toasty.info(MyApplication.mCurrentActivity,"left！").show()
+//            }
+//
+//            override fun secondOrRight() {
+//                mm.dismiss()
+//            }
+//        })
+//    }
 //  //隐私协议
 //  fun submitPrivacyGrantResult(granted: Boolean) {
 //    MobSDK.submitPolicyGrantResult(granted, object : OperationCallback<Void?>() {
@@ -78,6 +91,7 @@ class MainActivity : BaseActivity() {
 //  }
 
     private fun initData() {
+
         val fragments = ArrayList<Fragment>()
         fragments.add(Mainpagefragment01())
         fragments.add(Mainpagefragment01())
@@ -85,8 +99,7 @@ class MainActivity : BaseActivity() {
         fragments.add(Mainpagefragment01())
         fragments.add(Mainpagefragment01())
 
-        mViewPage?.setOffscreenPageLimit(2)
-        mViewPage?.setAdapter(object : FragmentPagerAdapter(supportFragmentManager) {
+        mViewPage!!.setAdapter(object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return fragments[position]
             }
@@ -111,18 +124,19 @@ class MainActivity : BaseActivity() {
             }
         })
 
-        //模拟数据
+//        //模拟数据
         var mTitleList: ArrayList<String> = ArrayList<String>()
         mTitleList.add("图文1")
         mTitleList.add("图文2")
-        mTitleList.add("图文3")
-        mTitleList.add("图文4")
-        mTitleList.add("图文5")
-        mTitleList.add("图文6")
+        mTitleList.add("图文2")
+        mTitleList.add("图文2")
+        mTitleList.add("图文2")
         for (i: Int in 0 until mTitleList!!.size) {
-            mTopTab?.getTabAt(i)
+//            mTopTab!!.getTabAt(i)!!.setCustomView(R.layout.tab_indicator_view_auto_repay)
+            mTopTab!!.getTabAt(i)
                 ?.setText(mTitleList.get(i))
         }
         Logger.d("hello,欢迎来到cwzj")//测试Logger
     }
+
 }

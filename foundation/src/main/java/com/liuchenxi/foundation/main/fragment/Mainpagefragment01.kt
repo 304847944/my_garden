@@ -1,12 +1,8 @@
 package com.liuchenxi.foundation.main.fragment
 
-import android.util.Log
-import android.view.View
 import com.liuchenxi.foundation.R
 import com.liuchenxi.foundation.base.BaseFragment
 import com.orhanobut.logger.Logger
-import es.dmoral.toasty.Toasty
-import java.util.ArrayList
 
 class Mainpagefragment01 : BaseFragment(){
 //    lateinit var mHomeAdapter: HomeAdaptertest
@@ -17,7 +13,7 @@ class Mainpagefragment01 : BaseFragment(){
     }
 
     override fun setContentView(): Int {
-        return R.layout.fragment01xml
+        return R.layout.fragment_fragment01xml
     }
 
     override fun onResume() {

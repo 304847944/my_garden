@@ -8,6 +8,8 @@ import androidx.annotation.ColorInt;
 
 import com.liuchenxi.foundation.BaseApplication;
 import com.liuchenxi.foundation.TextureManager;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import es.dmoral.toasty.Toasty;
 
@@ -20,5 +22,7 @@ public class MyApplication extends BaseApplication {
         TextureManager.Companion.InitFresco(this);
         //设置默认toast相关
         Toasty.Config.getInstance().setToastTypeface(Typeface.DEFAULT).allowQueue(false).apply();
+        //初始化logger
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 }

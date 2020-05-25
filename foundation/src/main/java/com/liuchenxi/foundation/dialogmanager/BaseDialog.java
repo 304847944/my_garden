@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -181,7 +180,7 @@ public class BaseDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.base_dialog_general_old);
+        setContentView(R.layout.dialog_base_dialog_general_old);
         initView();
         setCanceledOnTouchOutside(false);
         // getWindow().setBackgroundDrawableResource(android.R.color.transparent);
