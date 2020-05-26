@@ -3,6 +3,7 @@ package com.liuchenxi.mygarden
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -16,19 +17,28 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.Gson
 import com.liuchenxi.foundation.BaseApplication
 import com.liuchenxi.foundation.PermissionsManager
 import com.liuchenxi.foundation.base.BaseActivity
 import com.liuchenxi.foundation.base.DeviceInfo
 import com.liuchenxi.foundation.dialogmanager.BaseDialog
 import com.liuchenxi.foundation.dialogmanager.GeneralDialog
+import com.liuchenxi.foundation.http.RequestList
+import com.liuchenxi.foundation.http.base.RequestCallBack
+import com.liuchenxi.foundation.http.module.BaseData
+import com.liuchenxi.foundation.http.module.Response_JuheNews
 import com.liuchenxi.foundation.main.fragment.Mainpagefragment01
 import com.liuchenxi.foundation.util.GeneralUtil
 import com.liuchenxi.mygarden.databinding.ActivityMainBinding
 import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import es.dmoral.toasty.Toasty
-import java.util.ArrayList
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 
 //import com.mob.MobSDK
@@ -121,6 +131,22 @@ class MainActivity : BaseActivity() {
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 Toasty.info(rootView.root.context,this.javaClass.name + "onTabSelected").show()
+                RequestList.mSingleInstance.getJuheNews()
+                    .getJuheNews("yule", "3fea208f1bec73e501a802af8514bfa6")
+                    .map({ t: BaseData ->
+                        Gson().fromJson(t.result, Response_JuheNews::class.java)
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe( object : RequestCallBack<Response_JuheNews?>() {
+                        override fun onResponse(response: Response_JuheNews?) {
+                            Logger.d("onResponse:" + response?.data?.get(0)?.uniquekey)
+                        }
+
+                        override fun onFailure(error: String) {
+                            Logger.d("onFailure:" + error.toString())
+                        }
+                    })
             }
         })
 
@@ -138,5 +164,4 @@ class MainActivity : BaseActivity() {
         }
         Logger.d("hello,欢迎来到cwzj")//测试Logger
     }
-
 }
