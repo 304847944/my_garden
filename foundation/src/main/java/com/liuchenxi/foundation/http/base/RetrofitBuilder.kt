@@ -18,7 +18,8 @@ import com.orhanobut.logger.PrettyFormatStrategy
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.LogStrategy
 
-
+//缺少日志存储到本地（日志的拓展，查下logger是否支持）
+//缺少网络缓存（okhttp的chach已经有了，测试下要）
 class RetrofitBuilder {
    private var mCacheLocation: File? //这里写死好了！
    private var mToken:String = ""
