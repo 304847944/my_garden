@@ -16,9 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         //注释器问题报错添加 Annotation processors
-//        javaCompileOptions {
-//            annotationProcessorOptions { includeCompileClasspath = true }
-//        }
+        javaCompileOptions {
+            annotationProcessorOptions { includeCompileClasspath = true }
+        }
         //这里不知道为啥，会重复这个文件，所以去掉
         packagingOptions {
             exclude 'META-INF/metadata.kotlin_module'

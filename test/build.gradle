@@ -1,5 +1,10 @@
 apply plugin: 'java-library'
 
+//新版gradle
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

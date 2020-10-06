@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.liuchenxi.foundation.BaseApplication
+import com.liuchenxi.foundation.BaseApplication.mCurrentActivity
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -17,6 +18,7 @@ open class BaseActivity : AppCompatActivity() {
     private var mOrientationListener: OrientationSensorListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        mCurrentActivity = this;
         super.onCreate(savedInstanceState)
 //        initTopbar()
 //        sm = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
