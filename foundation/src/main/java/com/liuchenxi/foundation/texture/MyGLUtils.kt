@@ -77,34 +77,9 @@ object MyGLUtils {
         return genBuf[0]
     }
 
-    fun loadTexture(context: Context, resourceId: Int, size: IntArray): Int {
-        val texId = genTexture()
-        if (texId != 0) {
-            val options = BitmapFactory.Options()
-            options.inScaled = false // No pre-scaling
-            options.inJustDecodeBounds = true
-
-            // Just decode bounds
-            BitmapFactory.decodeResource(context.resources, resourceId, options)
-
-            // Set return size
-            size[0] = options.outWidth
-            size[1] = options.outHeight
-
-            // Decode
-            options.inJustDecodeBounds = false
-            val bitmap =
-                BitmapFactory.decodeResource(context.resources, resourceId, options)
-
-            // Load the bitmap into the bound texture.
-            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
-
-            // Recycle the bitmap, since its data has been loaded into OpenGL.
-            bitmap.recycle()
-        }
-        return texId
-    }
-
+    /**
+     * 启用shader
+     */
     fun buildProgram(
         context: Context,
         vertexSourceRawId: Int,

@@ -47,12 +47,18 @@ public class CameraRenderer : Runnable, TextureView.SurfaceTextureListener {
     override fun run() {
         initGL(surfaceTexture!!)
         selectedFilter =  CameraFilter(context)
-        if (selectedFilter != null) selectedFilter!!.onAttach()
+//        if (selectedFilter != null) selectedFilter!!.onAttach()
         // Create texture for camera preview
         cameraTextureId = MyGLUtils.genTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES)
+        //https://upload-images.jianshu.io/upload_images/6126848-99a924ba8ae950f8.png
         cameraSurfaceTexture = SurfaceTexture(cameraTextureId)
         // Start camera preview
         try {
+            //SurfaceTexture的updateTexImage方法会更新接收到的预览数据到
+            // 其绑定的OpenGL纹理中。该纹理会默认绑定到OpenGL
+            // Context的GL_TEXTURE_EXTERNAL_OES纹理目标对象中。
+            // GL_TEXTURE_EXTERNAL_OES是OpenGL中一个特殊的纹理目标对象，
+            // 与GL_TEXTURE_2D是同级的
             camera!!.setPreviewTexture(cameraSurfaceTexture)
             camera!!.startPreview()
         } catch (ioe: IOException) {
@@ -93,8 +99,8 @@ public class CameraRenderer : Runnable, TextureView.SurfaceTextureListener {
 
 
     override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture?, width: Int, height: Int) {
-        gwidth = -width
-        gheight = -height
+//        gwidth = -width
+//        gheight = -height
     }
 
     override fun onSurfaceTextureUpdated(p0: SurfaceTexture?) {
@@ -120,8 +126,8 @@ public class CameraRenderer : Runnable, TextureView.SurfaceTextureListener {
         renderThread = Thread(this)
 
         surfaceTexture = surface
-        gwidth = -width
-        gheight = -height
+        gwidth = width
+        gheight = height
         // Open camera
         val backCamera: Pair<CameraInfo, Int>? = getBackCamera()
         val backCameraId = backCamera!!.second

@@ -1,6 +1,6 @@
 precision highp float;
-
-uniform vec3                iResolution;
+//注释测试
+//uniform vec3                iResolution;
 uniform sampler2D           iChannel0;
 varying vec2                texCoord;
 

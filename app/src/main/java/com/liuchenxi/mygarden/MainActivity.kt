@@ -46,13 +46,13 @@ class MainActivity : BaseActivity() {
         mCanara = CameraRenderer.mCameraRenderer
         mCanara.CameraRenderInit(this)
         textureView.surfaceTextureListener = mCanara
-        textureView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-            mCanara.onSurfaceTextureSizeChanged(
-                null,
-                v.width,
-                v.height
-            )
-        }
+//        textureView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+//            mCanara.onSurfaceTextureSizeChanged(
+//                null,
+//                v.width,
+//                v.height
+//            )
+//        }
     }
 
     override fun onResume() {

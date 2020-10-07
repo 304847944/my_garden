@@ -9,8 +9,8 @@ import javax.microedition.khronos.opengles.GL10
  */
 class RenderBuffer(val width: Int, val height: Int, activeTexUnit: Int) {
     var texId = 0
-    var activeTexUnit = 0
-    private var renderBufferId = 0
+
+//    private var renderBufferId = 0
     private var frameBufferId = 0
 
     fun bind() {
@@ -29,27 +29,23 @@ class RenderBuffer(val width: Int, val height: Int, activeTexUnit: Int) {
             GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
             GLES20.GL_TEXTURE_2D, texId, 0
         )
-        //将renderbuffer附加到帧缓冲对象
-        GLES20.glFramebufferRenderbuffer(
-            GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
-            GLES20.GL_RENDERBUFFER, renderBufferId
-        )
+//        //将renderbuffer附加到帧缓冲对象
+//        GLES20.glFramebufferRenderbuffer(
+//            GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
+//            GLES20.GL_RENDERBUFFER, renderBufferId
+//        )
     }
 
     fun unbind() {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, 0)
+//        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, 0)
     }
 
     init {
-        this.activeTexUnit = activeTexUnit
         val genbuf = IntArray(1)
-
         // Generate and bind 2d texture
         GLES20.glActiveTexture(activeTexUnit)
         texId = MyGLUtils.genTexture()
-        val texBuffer = ByteBuffer.allocateDirect(width * height * 4)
-            .order(ByteOrder.nativeOrder()).asIntBuffer()
         GLES20.glTexImage2D(
             GLES20.GL_TEXTURE_2D,
             0,
@@ -59,7 +55,7 @@ class RenderBuffer(val width: Int, val height: Int, activeTexUnit: Int) {
             0,
             GLES20.GL_RGBA,
             GLES20.GL_UNSIGNED_BYTE,
-            texBuffer
+            null
         )
         //https://www.it610.com/article/1281538309616582656.htm
 //        // Generate frame buffer
@@ -69,10 +65,10 @@ class RenderBuffer(val width: Int, val height: Int, activeTexUnit: Int) {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId)
 
         // Generate render buffer
-        GLES20.glGenRenderbuffers(1, genbuf, 0)
-        renderBufferId = genbuf[0]
-        // Bind render buffer
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, renderBufferId)
+//        GLES20.glGenRenderbuffers(1, genbuf, 0)
+//        renderBufferId = genbuf[0]
+//        // Bind render buffer
+//        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, renderBufferId)
         /**
          * glRenderbufferStorage 指定存储在 renderbuffer 中图像的宽高以及颜色格式
          * 并按照此规格为之分配存储空间，当一个渲染缓存被创建，它没有任何数据存储区域
@@ -81,12 +77,12 @@ class RenderBuffer(val width: Int, val height: Int, activeTexUnit: Int) {
          * 用于深度的（GL_DEPTH_COMPONENT），或者是用于模板的格式（GL_STENCIL_INDEX）
          * Width和height是渲染缓存图像的像素维度。
          */
-        GLES20.glRenderbufferStorage(
-            GLES20.GL_RENDERBUFFER,
-            GLES20.GL_DEPTH_COMPONENT16,
-            width,
-            height
-        )
+//        GLES20.glRenderbufferStorage(
+//            GLES20.GL_RENDERBUFFER,
+//            GLES20.GL_DEPTH_COMPONENT16,
+//            width,
+//            height
+//        )
         unbind()
     }
 }
